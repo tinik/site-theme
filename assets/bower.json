@@ -1,0 +1,16 @@
+{
+    "name"    : "theme",
+    "version" : "0.1.0",
+    "private" : true,
+    "dependencies": {
+        "jquery"      : "~2.2.3",
+        "foundation"  : "~5.4.7",
+        "fontawesome" : "*"
+    },
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "temp"
+    ]
+}

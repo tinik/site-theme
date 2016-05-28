@@ -13,4 +13,4 @@ Text Domain: ntishchuk
 This theme, like WordPress, is licensed under the GPL.
 */
 
-@import "assets/css/theme.min.css";
+@import "assets/build/css/theme.min.css";

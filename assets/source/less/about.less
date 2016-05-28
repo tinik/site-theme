@@ -1,0 +1,107 @@
+
+.splash {
+    height: 500px;
+
+    h1 {
+        background: none repeat scroll 0 0 #2A2A2A;
+        color: #FFFFFF;
+        font-weight: 600;
+        letter-spacing: 4px;
+        padding: 10px 12px;
+    }
+
+    h1 .selected {
+        background: #FFFF00;
+        color: #2A2A2A;
+    }
+}
+
+.color-background {
+    color: #E8E8E8;
+    padding: 0px;
+    margin: 0px;
+
+    &.dark {
+        background: #2A2A2A repeat scroll 0 0;
+    }
+
+    &.light {
+        background: none repeat scroll 0 0 #F0F0F0;
+        color: #444444;
+    }
+}
+
+.accordion {
+    margin-bottom: 15px;
+
+    dd {
+        &.active {
+            a {
+                background: #FFFF00;
+                color: #353535;
+            }
+        }
+
+        a {
+            background-color: #353535;
+            border-bottom: 1px solid #2D2D2D;
+            color: #D6D8D9;
+            transition: background-color 0.3s, transform 1s;
+            -moz-transform: background-color 0.3s, transform 1s;
+            -webkit-transform: background-color 0.3s, transform 1s;
+            -o-transform: background-color 0.3s, transform 1s;
+
+            &:hover {
+                background: #FFFF00;
+                color: #353535;
+            }
+        }
+
+        &:first-child a {
+            border-radius: 3px 3px 0 0;
+        }
+
+
+        &:last-child a {
+            border-radius: 0px 0px 3px 3px;
+            border-bottom: 0px;
+        }
+    }
+}
+
+.footer {
+    background: none repeat scroll 0 0 #222222;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25) inset;
+    color: #666666;
+    font-size: 0.75rem;
+    padding: 24px 0 10px;
+    position: relative;
+    z-index: 1000;
+
+    .copyright {
+        font-size: 0.75rem;
+    }
+}
+
+.social {
+    img {
+        opacity: 0.6;
+
+        &:hover {
+          opacity: 1;
+        }
+    }
+}
+
+.point {
+    background: url("./point.png") no-repeat;
+    padding-left: 135px;
+    min-height: 125px;
+    border: 0px;
+    color: #FFFF00;
+}
+
+.copyright {
+    padding: 15px 0px;
+    text-align: center;
+}

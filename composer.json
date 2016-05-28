@@ -1,0 +1,12 @@
+{
+    "name": "nikolay/ntishchuk",
+    "type": "wp-theme, theme",
+    "authors": [
+        {
+            "name": "Nikolay",
+            "email": "john@example.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

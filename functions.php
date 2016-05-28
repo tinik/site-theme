@@ -10,7 +10,7 @@
     }
 
     function assets_uri($path, $dispay = false) {
-        $uri = sprintf('%s/assets/%s', get_template_directory_uri(), $path);
+        $uri = sprintf('%s/assets/build/%s', get_template_directory_uri(), $path);
         if($dispay) {
             print $uri;
         }

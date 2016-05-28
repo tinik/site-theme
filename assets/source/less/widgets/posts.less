@@ -1,0 +1,41 @@
+.widget .theme-custom-posts {
+    padding:0 2em;
+
+    &:after {
+        content: "";
+        display: block;
+    }
+
+    .post {
+        &:last-child {
+            padding-bottom: 15px;
+        }
+
+        .delimiter {
+            border-left: 1px solid #ECECEC;
+        }
+
+        .post-date {
+            margin: 0;
+            padding: 0;
+            width: auto;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            text-align: center;
+
+            .post-month {
+                margin: 0;
+                padding: 0;
+                text-align: center;
+            }
+
+            .post-day {
+                font-size: 2rem;
+                margin: 0;
+                padding: 0;
+                text-align: center;
+            }
+        }
+    }
+}
