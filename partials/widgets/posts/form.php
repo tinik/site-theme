@@ -1,0 +1,1 @@
+<p><?php _e('This widget not have settings.', 'ntishchuk'); ?></p>

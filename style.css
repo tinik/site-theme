@@ -1,0 +1,16 @@
+/*
+Theme Name: Personal Blog Theme
+Theme URI: http://ntischuk.com/
+Author: Nikolay Tishchuk
+Author URI: http://ntischuk.com/
+Description: Personal Blog Theme
+Version: 1.0
+License:
+License URI:
+Tags: black, yellow, dark, light, responsive-layout
+Text Domain: ntishchuk
+
+This theme, like WordPress, is licensed under the GPL.
+*/
+
+@import "assets/css/theme.min.css";
