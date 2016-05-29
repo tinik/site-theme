@@ -1,8 +1,9 @@
 <?php
 
 use Helpers\Spaceless;
+use Helpers\Template;
 
-abstract class AbstractWidget extends WP_Widget
+abstract class AbstractWidget extends \WP_Widget
 {
 
     protected function fetch($type, array $vars, $display = false)
@@ -24,7 +25,7 @@ abstract class AbstractWidget extends WP_Widget
     {
         $pattern = sprintf('%s/%s', $this->path, $type);
 
-        $template = Helpers\Template::locate($pattern);
+        $template = Template::locate($pattern);
         if(is_file($template) && file_exists($template)) {
             extract($vars);
             return include($template);

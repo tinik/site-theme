@@ -24,7 +24,6 @@ add_filter('search_result', function($args) {
 
     $query = $args['query'];
     if(!have_posts() && !strlen($query)) {
-        var_dump(__LINE__);
         return;
     }
 

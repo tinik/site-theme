@@ -1,11 +1,11 @@
 <?php
 
-class Posts extends \AbstractWidget
+class Posts extends AbstractWidget
 {
 
     protected $path = 'partials/widgets/posts';
 
-    public function __construct()
+    public function __invoke()
     {
         parent::__construct('ThemeCustomPosts', _('Theme Custom Posts'), [
             'description' => _('Theme Custom Posts')

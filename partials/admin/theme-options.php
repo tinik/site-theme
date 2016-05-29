@@ -14,6 +14,7 @@
     <form method="post" action="options.php" enctype="multipart/form-data">
         <?php settings_fields('custom_theme_options'); ?>
         <div class="icon32" id="icon-tools"></div>
+
         <h2><?php _e('Theme Options'); ?></h2>
         <table class="form-table social">
             <?php foreach($options as $key=>$title): ?>

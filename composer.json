@@ -1,6 +1,7 @@
 {
     "name": "nikolay/ntishchuk",
     "type": "wp-theme, theme",
+    "homepage": "http://ntischuk.com",
     "authors": [
         {
             "name": "Nikolay",
@@ -8,5 +9,22 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        
+    },
+    "config": {
+        "use-include-path": true
+    },
+    "autoload": {
+        "classmap": [
+             "source/"
+        ],
+        "psr-0": {
+            "": "source/"
+        },
+        "files": [
+            "source/admin.php", 
+            "source/search.php" 
+        ]
+    }
 }

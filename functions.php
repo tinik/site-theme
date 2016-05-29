@@ -1,11 +1,8 @@
 <?php
-    use Helpers\Spaceless;
-    use Helpers\Template;
 
-    // Stumblr theme options
-    require_once __DIR__ .'/inc/admin-menu.php';
-    require_once __DIR__ .'/inc/search.php';
-    foreach (glob(__DIR__ .'/inc/*/*.php') as $widget) {
+    /** @var \Composer\Autoload\ClassLoader $autoload */
+    $autoload = require_once __DIR__ . '/vendor/autoload.php';
+    foreach (glob(__DIR__ .'/source/Widgets/*.php') as $widget) {
         require_once $widget;
     }
 
@@ -25,6 +22,10 @@
     add_image_size('stumblr-large-image', 740, 9999);
 
     add_action('init', function() {
+        if(!is_plugin_active('siteorigin-panels/siteorigin-panels.php')) {
+            wp_die('Plugin "siteorigin-panels" is not active.');
+        }
+
         // clean up the <head>
         remove_action('wp_head', 'rsd_link');
         remove_action('wp_head', 'wlwmanifest_link');
@@ -53,13 +54,13 @@
     });
 
     add_action('wp_nav_menu', function($output) {
-        return Template::feth('partials/menu-header', [
-            'output'=>Spaceless::content($output)
+        return \Helpers\Template::feth('partials/menu-header', [
+            'output'=>\Helpers\Spaceless::content($output)
         ]);
     });
 
     add_filter('the_content', function($content) {
-        return Spaceless::content($content);
+        return \Helpers\Spaceless::content($content);
     });
 
     // setup footer widget area
