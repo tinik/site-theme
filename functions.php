@@ -1,5 +1,7 @@
 <?php
 
+    use Helpers;
+
     /** @var \Composer\Autoload\ClassLoader $autoload */
     $autoload = require_once __DIR__ . '/vendor/autoload.php';
     foreach (glob(__DIR__ .'/source/Widgets/*.php') as $widget) {
@@ -22,10 +24,6 @@
     add_image_size('stumblr-large-image', 740, 9999);
 
     add_action('init', function() {
-        if(!is_plugin_active('siteorigin-panels/siteorigin-panels.php')) {
-            wp_die('Plugin "siteorigin-panels" is not active.');
-        }
-
         // clean up the <head>
         remove_action('wp_head', 'rsd_link');
         remove_action('wp_head', 'wlwmanifest_link');

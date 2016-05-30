@@ -1,6 +1,17 @@
 <?php
 
+use Helpers\Message;
+
 add_action('admin_init', function() {
+    if(!is_plugin_active('siteorigin-panels/siteorigin-panels.php')) {
+        add_action('admin_notices', function() {
+            $type = 'error';
+            $message = _('Plugin "siteorigin-panels" is not active.');
+
+            Message::admin($type, $message);
+        });
+    }
+
     // SETTINGS
     register_setting('custom_theme_options', 'social', function($plugin_options) {
         return $plugin_options;

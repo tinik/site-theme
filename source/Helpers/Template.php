@@ -13,20 +13,29 @@ class Template
 
     static public function feth($name, array $variables = [], $display = false)
     {
-        $template = self::locate($name);
+        $locate = $template = self::locate($name);
+        if (!is_file($template) || !file_exists($template)) {
+            throw new \RuntimeException(sprintf('Not found %s', $name));
+        }
 
         $vars = new \ArrayObject($variables);
+        do_action('theme_template', [
+            'name' => $name,
+            'vars' => $vars
+        ]);
+
+        $variables = $vars->getArrayCopy();
 
         $cache = '';
         ob_start();
-        if (is_file($template) && file_exists($template)) {
-            extract($variables);
-            include ($template);
-        }
+
+        extract($variables);
+        include ($template);
+
         $cache = ob_get_contents();
         ob_end_clean();
 
-        if($display) {
+        if ($display) {
             echo $cache;
         }
 
