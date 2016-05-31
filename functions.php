@@ -1,5 +1,4 @@
 <?php
-
     use Helpers;
 
     /** @var \Composer\Autoload\ClassLoader $autoload */
@@ -19,9 +18,12 @@
 
     // Add RSS links to <head> section
     add_theme_support('automatic-feed-links');
-    // Stumblr post thumbnails
-    add_theme_support('post-thumbnails');
-    add_image_size('stumblr-large-image', 740, 9999);
+
+    // Thumbnails - remove if exist
+    add_theme_support('single-image-thumbnail');
+
+    // Thumbnails - set image size
+    add_image_size('single-image-thumbnail', 800, 600);
 
     add_action('init', function() {
         // clean up the <head>

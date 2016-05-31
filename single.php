@@ -25,8 +25,11 @@ dynamic_sidebar('widgets_header');
                     <p class="post-category"><?php the_category(', ') ?></p>
                     <div class="custom-content">
                         <?php if(has_post_thumbnail()): ?>
-                            <div class="custom-image"><?php the_post_thumbnail('stumblr-large-image'); ?></div>
+                            <div class="custom-image"><?php
+                                the_post_thumbnail('single-image-thumbnail');
+                            ?></div>
                         <?php endif; ?>
+
                         <?php the_content(); ?>
                     </div>
                     <div class="tags"><?php get_theme_custom_tags(); ?></div>
