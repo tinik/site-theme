@@ -12,6 +12,11 @@ class Accordion extends AbstractWidget
         ]);
     }
 
+    public function partial()
+    {
+        return $this->template('partial', []);
+    }
+
     /**
      * Front-end display of widget.
      * @see WP_Widget::widget()

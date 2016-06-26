@@ -22,13 +22,19 @@ class Posts extends AbstractWidget
     {
         $paged = max(1, get_query_var('paged'));
 
-        $posts = query_posts([
+        $query = [
             'post_type'      => 'post',
             'post_status'    => ['publish'],
             'posts_per_page' => 10,
             'paged'          => $paged,
             'orderby'        => ['date'=>'DESC'],
-        ]);
+        ];
+
+        if(is_super_admin()) {
+            $query['post_status'] = ['publish', 'future', 'draft', 'pending', 'private'];
+        }
+
+        $posts = query_posts($query);
 
         $this->fetch('widget', array_merge($instance, $args, [
             'paged' => $paged,

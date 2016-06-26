@@ -68,12 +68,14 @@ module.exports = function(grunt) {
                 dest : '<%= paths.build %>/css/<%= pkg.name %>.min.css'
             }
         },
+
         cssmin : {
             build : {
                 src : ['<%= paths.build %>/css/<%= pkg.name %>.css'],
                 dest : '<%= paths.build %>/css/<%= pkg.name %>.min.css'
             }
         },
+
         uglify : {
             build : {
                 src : ['<%= paths.build %>/js/<%= pkg.name %>.js'],
@@ -97,7 +99,7 @@ module.exports = function(grunt) {
                 tasks : ['styles']
             },
         },
-
+        
         clean : {
             scripts : [
                 '<%= paths.build %>/js'
@@ -115,14 +117,24 @@ module.exports = function(grunt) {
         },
 
         concat : {
+            admin_scripts: {
+                options: {
+                    banner: '<%= banner %>'
+                },
+                src : [
+                    '<%= paths.src %>/scripts/widgets/**/*.js',
+                    '<%= paths.src %>/scripts/widgets/*.js'
+                ],
+                dest : '<%= paths.build %>/js/admin.js'
+            },
             scripts : {
                 options: {
                     banner: '<%= banner %>'
                 },
                 src : [
                     '<%= components.foundation.scripts %>',
-                    '<%= paths.src %>/scripts/**/*.js',
-                    '<%= paths.src %>/scripts/*.js'
+                    '<%= paths.src %>/scripts/themes/*.js',
+                    '<%= paths.src %>/scripts/themes/**/*.js'
                 ],
                 dest : '<%= paths.build %>/js/<%= pkg.name %>.js'
             },
@@ -143,6 +155,7 @@ module.exports = function(grunt) {
                 dest : '<%= paths.build %>/less/<%= pkg.name %>.less'
             }
         },
+
         copy : {
             images : {
                 files : [{
@@ -164,7 +177,7 @@ module.exports = function(grunt) {
 
         bower : {
             install : {
-                copy : true,
+                copy    : true,
                 cleanup : true,
                 install : true
             }
@@ -177,8 +190,8 @@ module.exports = function(grunt) {
     grunt.registerTask('default',  ['scripts', 'styles', 'images', 'fonts']);
     grunt.registerTask('optimize', ['default', 'uglify', 'cssmin', 'imagemin']);
 
-    grunt.registerTask('scripts', ['clean:scripts', 'concat:scripts']);
-    grunt.registerTask('styles',  ['clean:styles', 'concat:styles', 'less:build']);
-    grunt.registerTask('images',  ['clean:images', 'copy:images']);
-    grunt.registerTask('fonts',   ['clean:fonts', 'copy:fonts']);
+    grunt.registerTask('scripts', ['clean:scripts', 'concat:scripts', 'concat:admin_scripts']);
+    grunt.registerTask('styles',  ['clean:styles',  'concat:styles', 'less:build']);
+    grunt.registerTask('images',  ['clean:images',  'copy:images']);
+    grunt.registerTask('fonts',   ['clean:fonts',   'copy:fonts']);
 };

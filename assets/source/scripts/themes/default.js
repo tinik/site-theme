@@ -1,6 +1,6 @@
 
-$(document).ready(function() {
-    $(document).foundation();
+jQuery(document).ready(function() {
+    jQuery(document).foundation();
 
     var doc = document.documentElement;
     doc.setAttribute('data-useragent', navigator.userAgent);
@@ -15,13 +15,13 @@ $(document).ready(function() {
     document.body.appendChild(up);
 
     // show the buttons
-    var top = $(up);
+    var top = jQuery(up);
     top.click(function(e) {
         // clicking the "up" button will make the page scroll to the top of the page
-        $('html, body').animate({scrollTop: '5px'}, 'slow');
+        jQuery('html, body').animate({scrollTop: '5px'}, 'slow');
     });
 
-    $(window).scroll(function(event) {
+    jQuery(window).scroll(function(event) {
         if(window.scrollY > 400) {
             top.stop().animate({'opacity':'.7'});
         } else if(window.scrollY < 380) {

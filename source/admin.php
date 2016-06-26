@@ -17,8 +17,11 @@ add_action('admin_init', function() {
         return $plugin_options;
     });
 
-    // CSS
-    wp_enqueue_style('css_options', assets_uri('css/admin/options.css'));
+    // STYLE
+    wp_enqueue_style('style_options', assets_uri('css/admin/options.css'));
+
+    // SCRIPT
+    wp_enqueue_script('script_theme', assets_uri('js/admin.js'), [], '0.1.1', true);
 });
 
 add_action('admin_menu', function() {
