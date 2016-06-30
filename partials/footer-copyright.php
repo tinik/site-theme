@@ -1,1 +1,1 @@
-<div class="copyright">&copy; Nikolay Tishchuk 2012 - <?php echo date('Y', time()); ?></div>
+<div class="copyright text-right">&copy; Nikolay Tishchuk 2012 - <?php echo date('Y', time()); ?></div>

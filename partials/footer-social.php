@@ -1,7 +1,7 @@
 <?php $social = get_option('social'); ?>
 <?php if($social): ?>
-<div class="social">
-    <ul class="inline-list">
+<div class="clearfix social">
+    <ul class="inline-list right">
         <?php foreach($social as $key=>$item): ?>
             <?php if($item && !empty($item)): ?>
             <li>
