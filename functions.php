@@ -26,6 +26,16 @@
     add_image_size('single-image-thumbnail', 800, 600);
 
     add_action('init', function() {
+        if(!is_user_logged_in()) {
+            add_filter('autoptimize_filter_css_replacetag', create_function('$replacetag', 'return ["</head>","after"];'),10,1);
+        }
+
+        add_filter('autoptimize_css_include_inline',    create_function(null, 'return true;'), 10,1);
+        add_filter('autoptimize_css_do_minify',         create_function(null, 'return true;'), 10,1);
+
+        add_filter('autoptimize_filter_js_replacetag',  create_function('$replacetag', 'return ["</footer>","after"];'),10,1);
+        add_filter('autoptimize_js_do_minify',          create_function(null, 'return true;'), 10,1);
+
         // clean up the <head>
         remove_action('wp_head', 'rsd_link');
         remove_action('wp_head', 'wlwmanifest_link');

@@ -55,24 +55,32 @@ module.exports = function(grunt) {
         },
 
         less : {
-            development: {
+            build : {
                 options: {
                     compress: true,
                     optimization: 2
-                }
-            },
-            build : {
+                },
                 src : [
                     '<%= paths.build %>/less/<%= pkg.name %>.less'
                 ],
-                dest : '<%= paths.build %>/css/<%= pkg.name %>.min.css'
+                dest : '<%= paths.build %>/css/<%= pkg.name %>.css'
             }
         },
 
         cssmin : {
-            build : {
-                src : ['<%= paths.build %>/css/<%= pkg.name %>.css'],
-                dest : '<%= paths.build %>/css/<%= pkg.name %>.min.css'
+            options: {
+                shorthandCompacting: false,
+                roundingPrecision: -1,
+                keepSpecialComments: 0
+            },
+            target: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= paths.build %>/css',
+                    src: ['*.css', '!*.min.css'],
+                    dest: '<%= paths.build %>/css',
+                    ext: '.min.css'
+                }]
             }
         },
 
@@ -99,7 +107,7 @@ module.exports = function(grunt) {
                 tasks : ['styles']
             },
         },
-        
+
         clean : {
             scripts : [
                 '<%= paths.build %>/js'
@@ -156,6 +164,13 @@ module.exports = function(grunt) {
             }
         },
 
+        img: {
+            // using only dirs with output path
+            optimize: {
+                src  : '<%= paths.build %>/img/',
+            },
+        },
+
         copy : {
             images : {
                 files : [{
@@ -184,14 +199,16 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-img');
 
     // Custom Tasks
     grunt.registerTask('default',  ['scripts', 'styles', 'images', 'fonts']);
     grunt.registerTask('optimize', ['default', 'uglify', 'cssmin', 'imagemin']);
 
     grunt.registerTask('scripts', ['clean:scripts', 'concat:scripts', 'concat:admin_scripts']);
-    grunt.registerTask('styles',  ['clean:styles',  'concat:styles', 'less:build']);
-    grunt.registerTask('images',  ['clean:images',  'copy:images']);
+    grunt.registerTask('styles',  ['clean:styles',  'concat:styles', 'less:build', 'cssmin']);
+    grunt.registerTask('images',  ['clean:images',  'copy:images', 'img:optimize']);
     grunt.registerTask('fonts',   ['clean:fonts',   'copy:fonts']);
 };
