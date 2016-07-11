@@ -25,18 +25,13 @@ class Accordion extends AbstractWidget
      */
     public function widget($args, $instance)
     {
-        $this->fetch('widget', array_merge($instance, $args, [
+        $this->render('widget', array_merge($instance, $args, [
             'index' => $args['widget_id'],
-        ]), true);
+        ]));
     }
 
     public function form($instance)
     {
-        $this->fetch('form', $instance, true);
+        $this->render('form', $instance);
     }
 }
-
-// Register and load the widget?php
-add_action('widgets_init', function() {
-    register_widget(Accordion::class);
-});

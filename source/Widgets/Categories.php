@@ -32,7 +32,7 @@ class Categories extends AbstractWidget
             'hide_empty'   => 1,
         ]);
 
-        $this->fetch('widget', array_merge($instance, $args), true);
+        $this->render('widget', array_merge($instance, $args));
     }
 
     /**
@@ -42,26 +42,6 @@ class Categories extends AbstractWidget
      */
     public function form($instance)
     {
-        $this->fetch('form', $instance, true);
-    }
-
-    /**
-     * Sanitize widget form values as they are saved.
-     *
-     * @see WP_Widget::update()
-     *
-     * @param array $new Values just sent to be saved.
-     * @param array $old Previously saved values from database.
-     *
-     * @return array Updated safe values to be saved.
-     */
-    public function update($new, $old)
-    {
-        return $new;
+        $this->render('form', $instance);
     }
 }
-
-// Register and load the widget?php
-add_action('widgets_init', function() {
-    register_widget(Categories::class);
-});

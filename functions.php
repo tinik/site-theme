@@ -3,9 +3,6 @@
 
     /** @var \Composer\Autoload\ClassLoader $autoload */
     $autoload = require_once __DIR__ . '/vendor/autoload.php';
-    foreach (glob(__DIR__ .'/source/Widgets/*.php') as $widget) {
-        require_once $widget;
-    }
 
     function assets_uri($path, $dispay = false) {
         $uri = sprintf('%s/assets/build/%s', get_template_directory_uri(), $path);
@@ -15,6 +12,11 @@
 
         return $uri;
     }
+
+    // Registration widgets
+    Accordion::register();
+    Categories::register();
+    Posts::register();
 
     // Add RSS links to <head> section
     add_theme_support('automatic-feed-links');
@@ -27,7 +29,7 @@
 
     add_action('init', function() {
         if(!is_user_logged_in()) {
-            add_filter('autoptimize_filter_css_replacetag', create_function('$replacetag', 'return ["</head>","after"];'),10,1);
+            add_filter('autoptimize_filter_css_replacetag', create_function('$replacetag', 'return ["</head>","before"];'),10,1);
         }
 
         add_filter('autoptimize_css_include_inline',    create_function(null, 'return true;'), 10,1);

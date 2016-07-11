@@ -36,11 +36,11 @@ class Posts extends AbstractWidget
 
         $posts = query_posts($query);
 
-        $this->fetch('widget', array_merge($instance, $args, [
+        $this->render('widget', array_merge($instance, $args, [
             'paged' => $paged,
             'query' => $GLOBALS['wp_query'],
             'index' => $args['widget_id'],
-        ]), true);
+        ]));
 
         wp_reset_query();
     }
@@ -53,14 +53,9 @@ class Posts extends AbstractWidget
             'featured' => __('Featured Image', 'themes'),
         ]);
 
-        $this->fetch('form', [
+        $this->render('form', [
             'instance' => $instance,
             'types'    => $types,
-        ], true);
+        ]);
     }
 }
-
-// Register and load the widget?php
-add_action('widgets_init', function() {
-    register_widget(Posts::class);
-});
