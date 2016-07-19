@@ -35,14 +35,14 @@ add_filter('search_result', function($args) {
         }
     }
 
-    Template::feth('partials/search/content', [
+    Template::fetch('partials/search/content', [
         'posts' => $posts,
         'query' => $query,
     ], true);
 });
 
 add_filter('get_search_form', function($form) {
-    return $form = Template::feth('partials/search/search', [
+    return $form = Template::fetch('partials/search/search', [
         'query'=>get_search_query()
     ]);
 });

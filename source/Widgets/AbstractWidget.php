@@ -1,5 +1,7 @@
 <?php
 
+namespace Widgets;
+
 use Helpers\TemplateTrait;
 
 abstract class AbstractWidget extends \WP_Widget
@@ -7,17 +9,17 @@ abstract class AbstractWidget extends \WP_Widget
 
     use TemplateTrait;
 
-    protected function render($template, array $variables)
+    protected function render($template, array $variables = [])
     {
         $path = sprintf('%s/%s', $this->path, $template);
-        $this->feth($path, $variables, true);
+        echo $this->content($path, $variables);
     }
 
     /**
      *
      * @return string
      */
-    protected function get_class()
+    static protected function get_class()
     {
         return get_called_class();
     }
@@ -27,7 +29,7 @@ abstract class AbstractWidget extends \WP_Widget
      */
     static public function register()
     {
-        $class_name = self::get_class();
+        $class_name = static::get_class();
         add_action('widgets_init', function() use(&$class_name){
             register_widget($class_name);
         });

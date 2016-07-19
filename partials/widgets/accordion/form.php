@@ -15,7 +15,7 @@ endif;
             <input type="button" class="create button button-primary" value="<?php _e('ADD'); ?>" />
         </div>
         <br />
-        <script type="text/template"><?php $this->partial(); ?></script>
+        <script type="text/template"><?php $this->render('partial'); ?></script>
     </div>
 
     <script type="text/javascript">

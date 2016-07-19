@@ -1,5 +1,7 @@
 <?php
 
+namespace Widgets;
+
 class Accordion extends AbstractWidget
 {
 
@@ -7,14 +9,10 @@ class Accordion extends AbstractWidget
 
     public function __construct()
     {
-        parent::__construct('ThemeCustomAccordion', _('Theme Custom Accordion'), [
-            'description' => _('Theme Custom Accordion')
+        parent::__construct('theme-custom-accordion', _('Theme Accordion'), [
+            'classname'   => 'Accordion',
+            'description' => _('Create "accordion" widget')
         ]);
-    }
-
-    public function partial()
-    {
-        return $this->template('partial', []);
     }
 
     /**

@@ -11,36 +11,41 @@ trait TemplateTrait
         return locate_template($pattern);
     }
 
-    static public function feth($name, array $variables = [], $display = false)
+    static public function fetch($name, array $variables = [], $display = false)
     {
-        $locate = $template = self::locate($name);
-        if (!is_file($template) || !file_exists($template)) {
-            throw new \RuntimeException(sprintf('Not found %s', $name));
-        }
-
-        $vars = new \ArrayObject($variables);
-        do_action('fetch_template', [
-            'name' => $name,
-            'vars' => $vars
-        ]);
-
-        $variables = $vars->getArrayCopy();
-
-        $cache = '';
-        ob_start();
-
-        extract($variables);
-        include ($template);
-
-        $cache = ob_get_contents();
-        ob_end_clean();
-
+        $content = self::content($name, $variables);
         if ($display) {
-            echo $cache;
-            return;
+            echo $content;
         }
 
-        return $cache;
+        return $content;
+    }
+
+    public function content($name, array $variables = [])
+    {
+        try {
+            $path = static::locate($name);
+            if (!is_file($path) || !file_exists($path)) {
+                throw new \RuntimeException(sprintf('Not found %s', $name));
+            }
+
+            $vars = new \ArrayObject($variables);
+            do_action('tempalte_prepare', [
+                'name' => $name,
+                'vars' => $vars
+            ]);
+
+            extract($vars->getArrayCopy());
+
+            ob_start();
+            require $path;
+            $content = ob_get_clean();
+        } catch (\Exception $ex) {
+            ob_end_clean();
+            throw $ex;
+        }
+
+        return $content;
     }
 
 }

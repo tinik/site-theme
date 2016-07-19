@@ -1,5 +1,8 @@
 <?php
-    use Helpers;
+
+    use Helpers\Template;
+    use Helpers\Spaceless;
+    use Options\OptionBox;
 
     /** @var \Composer\Autoload\ClassLoader $autoload */
     $autoload = require_once __DIR__ . '/vendor/autoload.php';
@@ -14,18 +17,16 @@
     }
 
     // Registration widgets
-    Accordion::register();
-    Categories::register();
-    Posts::register();
+    Widgets\Accordion::register();
+    Widgets\Categories::register();
+    Widgets\Posts::register();
 
-    // Add RSS links to <head> section
-    add_theme_support('automatic-feed-links');
-
-    // Thumbnails - remove if exist
-    add_theme_support('single-image-thumbnail');
-
-    // Thumbnails - set image size
-    add_image_size('single-image-thumbnail', 800, 600);
+    add_action('wp_head', function() {
+        $source = OptionBox::get('meta')->get_value('head_code');
+        if($source) {
+            echo $source;
+        }
+    });
 
     add_action('init', function() {
         if(!is_user_logged_in()) {
@@ -66,13 +67,13 @@
     });
 
     add_action('wp_nav_menu', function($output) {
-        return \Helpers\Template::feth('partials/menu-header', [
-            'output'=>\Helpers\Spaceless::content($output)
+        return Template::fetch('partials/menu-header', [
+            'output'=>Spaceless::content($output)
         ]);
     });
 
     add_filter('the_content', function($content) {
-        return \Helpers\Spaceless::content($content);
+        return Spaceless::content($content);
     });
 
     // setup footer widget area

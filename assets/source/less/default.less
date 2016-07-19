@@ -114,14 +114,30 @@ header {
         text-align: center;
         
         .inline-list {
+            margin-bottom:0px;
+            
             & > li {
                 margin-left: .5rem;
+                
+                a {
+                    opacity: 0.5;
+                    color: #5b5b5b;
+                    font-size: 26px;
+                    
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
             }
         }
-        
-        img {
+    }
+    
+    .feed-link {
+        a {
             opacity: 0.5;
-
+            color: #5b5b5b;
+            font-size: 26px;
+            
             &:hover {
                 opacity: 1;
             }

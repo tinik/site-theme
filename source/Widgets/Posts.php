@@ -1,14 +1,17 @@
 <?php
 
+namespace Widgets;
+
 class Posts extends AbstractWidget
 {
 
     protected $path = 'partials/widgets/posts';
 
-    public function __invoke()
+    public function __construct()
     {
-        parent::__construct('ThemeCustomPosts', _('Theme Custom Posts'), [
-            'description' => _('Theme Custom Posts')
+        parent::__construct('theme-custom-posts', _('Theme Posts'), [
+            'classname'   => 'Posts',
+            'description' => _('Render blog posts'),
         ]);
     }
 
@@ -48,7 +51,7 @@ class Posts extends AbstractWidget
     public function form($instance)
     {
         $types = apply_filters('widget_theme_post_content_types', [
-            ''         => __('None', 'themes'),
+            ''         => __('None',  'themes'),
             'title'    => __('Title', 'themes'),
             'featured' => __('Featured Image', 'themes'),
         ]);

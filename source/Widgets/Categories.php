@@ -1,5 +1,7 @@
 <?php
 
+namespace Widgets;
+
 class Categories extends AbstractWidget
 {
 
@@ -8,11 +10,12 @@ class Categories extends AbstractWidget
     public function __construct()
     {
         // Name
-        $widgetName = _('Theme Custom Categories');
+        $widgetName = _('Theme Categories');
 
-        parent::__construct('ThemeCustomCategories', $widgetName, array(
+        parent::__construct('theme-custom-categories', $widgetName, [
+            'classname'   => 'Categories',
             'description' => _('A side-nav list categories')
-        ));
+        ]);
     }
 
     /**
