@@ -1,14 +1,30 @@
 
 html {
-  padding: 0px;
-  margin: 0px;
-  scroll-behavior: smooth;
+    padding: 0px;
+    margin: 0px;
+    scroll-behavior: smooth;
+}
+
+@media screen and (max-width: 768px) {
+    html {
+        margin-top: 0px !important;
+        
+        body {
+            &.admin-bar {
+                padding-top:43px;
+            }
+        }
+    }
+    
+    * html {
+        margin-top: 0px;
+    }
 }
 
 body {
     background-color:rgba(0, 0, 0, 0);
-    padding: 0;
     text-rendering: optimizelegibility;
+    padding: 0;
 
     input {
         text-rendering: optimizelegibility;
@@ -145,13 +161,6 @@ header {
     }
 }
 
-
-.copyright {
-    padding: 15px 0px;
-    text-align: center;
-}
-
-
 ul.subnav {
     float: right;
     margin-top: 20px;
@@ -166,18 +175,20 @@ ul.subnav {
 
 .footer {
     background: none repeat scroll 0 0 #222222;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25) inset;
     color: #666666;
     font-size: 0.75rem;
-    padding: 24px 0 10px;
+    padding: 24px 0;
     position: relative;
     z-index: 1000;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.25) inset;
+
+    .copyright {
+        font-size: 0.75rem;
+        padding: 15px 0px;
+        text-align: center;
+    }
 }
-
-
-
-
-
 
 .syntaxhighlighter {
     overflow: auto;
