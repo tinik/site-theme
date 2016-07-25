@@ -23,6 +23,7 @@ trait TemplateTrait
 
     public function content($name, array $variables = [])
     {
+        $content = '';
         try {
             $path = static::locate($name);
             if (!is_file($path) || !file_exists($path)) {
@@ -38,8 +39,11 @@ trait TemplateTrait
             extract($vars->getArrayCopy());
 
             ob_start();
-            require $path;
-            $content = ob_get_clean();
+
+            include $path;
+
+            $content = ob_get_contents();
+            ob_end_clean();
         } catch (\Exception $ex) {
             ob_end_clean();
             throw $ex;

@@ -1,0 +1,45 @@
+.single .single-post {
+    margin:0px;
+}
+
+
+.nearest {
+    & > a, 
+    & > span {
+        color: #333;
+        display: inline-block;
+    }
+
+    & .prev, 
+    & .next {
+        background-color: rgba(0, 0, 0, 0);
+        color: #333333;
+        height: auto;
+        line-height: normal;
+        margin: 0;
+        min-height: 33px;
+        position: relative;
+    }
+
+    .prev {
+        .sub-title-post {
+            padding-right: 5px;
+        }
+    }
+
+    .next {
+        text-align: right;
+        
+        .sub-title-post {
+            padding-left: 5px;
+        }
+    }
+
+    .sub-title-post {
+        height: auto;
+        width: auto;
+        font-size: 0.8em;
+        color: #999999;
+        display: block;
+    }
+}

@@ -1,0 +1,43 @@
+
+.accordion {
+
+    :first-child {
+        border-radius: 3px 3px 0 0;
+    }
+
+    :last-child {
+        border-radius: 0px 0px 3px 3px;
+    }
+    
+    .accordion-item {
+        background-color: #353535;
+        color: #D6D8D9;
+        transition: background-color 0.3s, transform 1s;
+
+        &.is-active {
+            background-color: #FFFF00;
+
+            .accordion-title {
+                color: #353535;
+            }
+        }
+
+        .accordion-title {
+            border: 0px #e6e6e6 solid;
+            color: #d6d8d9;
+            display: block;
+            font-size: 1rem;
+            font-weight:bold;
+            line-height: 1;
+            padding: 1.25rem 1rem;
+            position: relative;
+            
+            &:focus, 
+            &:hover,
+            [aria-expanded="true"] {
+                background-color: #FFFF00;
+                color: #353535;
+            }
+        }
+    }
+}

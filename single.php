@@ -34,25 +34,22 @@ dynamic_sidebar('widgets_header');
                     </div>
                     <div class="tags"><?php get_theme_custom_tags(); ?></div>
                     <br />
-                    <div class="row nearest">
-                        <div class="large-6 columns">
-                            <?php $previous_post = get_previous_post(); ?>
-                            <?php if(!empty($previous_post)): ?>
-                                <a class="prev left" href="<?php echo get_permalink($previous_post->ID ); ?>">
-                                    <?php _e('Предедущая статья', 'ntishchuk'); ?>
-                                    <span class="sub-title-post"><?php echo $previous_post->post_title; ?></span>
-                                </a>
-                            <?php endif; ?>
-                        </div>
-                        <div class="large-6 columns">
-                            <?php $next_post = get_next_post(); ?>
-                            <?php if (!empty($next_post)): ?>
-                                <a class="next right" href="<?php echo get_permalink( $next_post->ID ); ?>">
-                                    <?php _e('Следующая статья', 'ntishchuk'); ?>
-                                    <span class="sub-title-post"><?php echo $next_post->post_title; ?></span>
-                                </a>
-                            <?php endif; ?>
-                        </div>
+                    <div class="nearest clearfix">
+                        <?php $previous_post = get_previous_post(); ?>
+                        <?php if(!empty($previous_post)): ?>
+                            <a class="float-left" href="<?php echo get_permalink($previous_post->ID ); ?>">
+                                <?php _e('Предедущая статья', 'ntishchuk'); ?>
+                                <span class="sub-title-post"><?php echo $previous_post->post_title; ?></span>
+                            </a>
+                        <?php endif; ?>
+
+                        <?php $next_post = get_next_post(); ?>
+                        <?php if (!empty($next_post)): ?>
+                            <a class="float-right" href="<?php echo get_permalink( $next_post->ID ); ?>">
+                                <?php _e('Следующая статья', 'ntishchuk'); ?>
+                                <span class="sub-title-post"><?php echo $next_post->post_title; ?></span>
+                            </a>
+                        <?php endif; ?>
                     </div>
                </article>
                <!-- end post -->

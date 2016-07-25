@@ -7,12 +7,13 @@ class Accordion extends AbstractWidget
 
     protected $path = 'partials/widgets/accordion';
 
-    public function __construct()
+    public function __construct($id = 'theme-custom-accordion', $name, $widget = [], $options = [])
     {
-        parent::__construct('theme-custom-accordion', _('Theme Accordion'), [
-            'classname'   => 'Accordion',
-            'description' => _('Create "accordion" widget')
-        ]);
+        $name = _('Theme Accordion');
+
+        parent::__construct($id, $name, array_merge([
+            'description' => _('Create "accordion" widget'),
+        ]), $options);
     }
 
     /**
@@ -23,13 +24,13 @@ class Accordion extends AbstractWidget
      */
     public function widget($args, $instance)
     {
-        $this->render('widget', array_merge($instance, $args, [
+        return $this->render('widget', array_merge($instance, $args, [
             'index' => $args['widget_id'],
         ]));
     }
 
     public function form($instance)
     {
-        $this->render('form', $instance);
+        return $this->render('form', $instance);
     }
 }

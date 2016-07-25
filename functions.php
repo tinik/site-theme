@@ -18,7 +18,6 @@
 
     // Registration widgets
     Widgets\Accordion::register();
-    Widgets\Categories::register();
     Widgets\Posts::register();
 
     add_action('wp_head', function() {
@@ -52,19 +51,27 @@
 
         if(!is_admin()) {
             // Registration js library
-            wp_enqueue_script('theme', assets_uri('js/theme.js'), ['jquery'], '0.1.1', true);
+            wp_enqueue_script('theme', assets_uri('js/theme.js'), ['jquery'], '1.3.6', true);
 
             // Registration css library
-            wp_enqueue_style('styles', get_stylesheet_uri());
+            wp_enqueue_style('styles', get_stylesheet_uri(), [], '1.3.6');
         }
     });
 
     add_action('widget_nav_menu_args', function($args) {
         return array_merge($args, [
-            'menu_class' => 'right',
+            'menu_class' => 'menu align-right',
             'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
         ]);
     });
+
+    add_filter('nav_menu_css_class' , function($classes, $item){
+        if(in_array('current-menu-item', $classes) ){
+            $classes[] = 'active ';
+        }
+
+        return $classes;
+    }, 10 , 2);
 
     add_action('wp_nav_menu', function($output) {
         return Template::fetch('partials/menu-header', [
@@ -109,7 +116,18 @@
         ]);
     }
 
-    function theme_pagination(WP_Query $query, $paged, $range = 2) {
+    add_action('siteorigin_panels_widget_dialog_tabs', function($tabs) {
+        $tabs['theme-bundle'] = [
+            'title' => _('Theme Bundle'),
+            'filter' => [
+                'groups' => ['theme-bundle']
+            ]
+        ];
+
+        return $tabs;
+    });
+
+    function create_pagination(WP_Query $query, $paged, $range = 2) {
         $showitems = ($range * 2) + 1;
         if (empty($paged)) {
             $paged = 1;
@@ -121,17 +139,22 @@
         }
 
         if (1 != $pages) {
-            echo '<div class="pagination-centered">';
-            echo '<ul class="pagination" data-element="pagination">';
+            echo '<div>';
+            echo '<ul class="pagination text-center" role="navigation" aria-label="Pagination">';
+
+            if(($paged-1) > 0) {
+                echo '<li class="pagination-previous hide-for-large"><a href="'. get_pagenum_link($paged-1) .'" aria-label="Previous page">Previous</a></li>';
+            }
+
             if ($paged > 2 && $paged > $range + 1 && $showitems < $pages) {
                 echo '<li class="arrow"><a href="' . get_pagenum_link(1) . '">1</a></li>';
-                echo '<li class="unavailable"><a href="#">&hellip;</a></li>';
+                echo '<li class="ellipsis"></li>';
             }
 
             foreach(range(1, $pages) as $i) {
                 if (1 != $pages && (! ($i >= $paged + $range + 1 || $i <= $paged - $range - 1) || $pages <= $showitems)) {
                     if($paged == $i) {
-                        echo '<li class="current"><a href="#">' . $i . '</a></li>';
+                        echo '<li class="current" aria-label="Page '. $i .'">'. $i .'</li>';
                     } else {
                         echo '<li><a href="'. get_pagenum_link($i) .'">'. $i .'</a></li>';
                     }
@@ -139,13 +162,18 @@
             }
 
             if ($paged < $pages - 2 && $paged + $range - 1 < $pages && $showitems < $pages) {
-                echo '<li class="unavailable"><a href="#">&hellip;</a></li>';
+                echo '<li class="ellipsis"></li>';
                 echo '<li class="arrow"><a href="' . get_pagenum_link($pages) . '">'. $pages .'</a></li>';
             }
-            echo "</ul>";
+
+            if($paged < $pages) {
+                echo '<li class="pagination-next hide-for-large"><a href="'. get_pagenum_link($paged+1) .'" aria-label="Next page">Next</a></li>';
+            }
+
+            echo '</ul>';
             echo '</div>';
         }
-    }
+    };
 
     // pagination
     function custom_pagination($pages = '', $range = 2)
@@ -165,8 +193,8 @@
         }
 
         if (1 != $pages) {
-            echo '<div class="pagination-centered">';
-            echo '<ul class="pagination" data-element="pagination">';
+            echo '<div>';
+            echo '<ul class="pagination text-center" role="navigation" aria-label="Pagination">';
             if ($paged > 2 && $paged > $range + 1 && $showitems < $pages) {
                 echo "<li class='arrow'><a href='". get_pagenum_link(1) ."'>1</a></li>";
                 echo "<li class='unavailable'><a href='#'>&hellip;</a></li>";
@@ -175,7 +203,7 @@
             foreach(range(1, $pages) as $i) {
                 if (1 != $pages && (! ($i >= $paged + $range + 1 || $i <= $paged - $range - 1) || $pages <= $showitems)) {
                     if($paged == $i) {
-                        echo "<li class='current'><a href='#'>". $i ."</a></li>";
+                        echo "<li class='current'>". $i ."</li>";
                     } else {
                         echo "<li><a href='". get_pagenum_link($i) ."'>". $i ."</a></li>";
                     }

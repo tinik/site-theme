@@ -6,11 +6,16 @@ module.exports = function(grunt) {
     // Display how match time it took to build each task
     require('time-grunt')(grunt);
 
+    grunt.loadNpmTasks('grunt-sass');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-img');
+
     // Project configuration.
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+        banner: "/*! <%= pkg.name %> <%= grunt.template.today('yyyy-mm-dd') %> */\n",
 
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        pkg: grunt.file.readJSON('package.json'),
 
         paths : {
             components : 'bower_components',
@@ -22,49 +27,18 @@ module.exports = function(grunt) {
         components : {
             jquery : {
                 path    : '<%= paths.components %>/jquery',
-                scripts : [
-                    '<%= components.jquery.path %>/dist/jquery.js'
-                ],
+                scripts : '<%= components.jquery.path %>/dist/jquery.js'
             },
             foundation  : {
-                path    : '<%= paths.components %>/foundation',
-                scripts : [
-                    '<%= components.foundation.path %>/js/vendor/*.js',
-                    '<%= components.foundation.path %>/js/foundation.min.js'
-                ],
-                styles  : [
-                    '<%= components.foundation.path %>/css/normalize.css',
-                    '<%= components.foundation.path %>/css/foundation.css'
-                ]
+                path    : '<%= paths.components %>/foundation-sites',
+                scripts : '<%= components.foundation.path %>/dist/foundation.min.js',
+                styles  : '<%= components.foundation.path %>/scss'
             },
             fontawesome : {
                 path   : '<%= paths.components %>/font-awesome',
                 fonts  : '<%= components.fontawesome.path %>/fonts',
-                styles : [
-                    '<%= components.fontawesome.path %>/less/variables.less',
-                    '<%= components.fontawesome.path %>/less/mixins.less',
-                    '<%= components.fontawesome.path %>/less/path.less',
-                    '<%= components.fontawesome.path %>/less/core.less',
-                    '<%= components.fontawesome.path %>/less/larger.less',
-                    '<%= components.fontawesome.path %>/less/fixed-width.less',
-                    '<%= components.fontawesome.path %>/less/list.less',
-                    '<%= components.fontawesome.path %>/less/stacked.less',
-                    '<%= components.fontawesome.path %>/less/icons.less'
-                ]
+                styles : '<%= components.fontawesome.path %>/scss'
             },
-        },
-
-        less : {
-            build : {
-                options: {
-                    compress: true,
-                    optimization: 2
-                },
-                src : [
-                    '<%= paths.build %>/less/<%= pkg.name %>.less'
-                ],
-                dest : '<%= paths.build %>/css/<%= pkg.name %>.css'
-            }
         },
 
         cssmin : {
@@ -94,40 +68,24 @@ module.exports = function(grunt) {
         watch : {
             scripts : {
                 files : [
-                    '<%= components.foundation.scripts %>',
-                    '<%= paths.src %>/js/**/*.js'
+                    '<%= paths.src %>/js/**/*.js',
+                    '<%= paths.src %>/js/*.js'
                 ],
                 tasks : ['scripts']
             },
             styles : {
                 files : [
-                    '<%= components.foundation.styles %>',
-                    '<%= paths.src %>/less/**/*.less'
+                    '<%= paths.src %>/scss/**/*.scss',
+                    '<%= paths.src %>/scss/*.scss'
                 ],
                 tasks : ['styles']
             },
         },
 
-        clean : {
-            scripts : [
-                '<%= paths.build %>/js'
-            ],
-            styles : [
-                '<%= paths.build %>/less',
-                '<%= paths.build %>/css'
-            ],
-            images : [
-                '<%= paths.build %>/img'
-            ],
-            fonts : [
-                '<%= paths.build %>/fonts'
-            ],
-        },
-
         concat : {
             admin_scripts: {
                 options: {
-                    banner: '<%= banner %>'
+                    banner: "<%= banner %>\n\n"
                 },
                 src : [
                     '<%= paths.src %>/scripts/widgets/**/*.js',
@@ -137,7 +95,7 @@ module.exports = function(grunt) {
             },
             scripts : {
                 options: {
-                    banner: '<%= banner %>'
+                    banner: "<%= banner %>\n\n"
                 },
                 src : [
                     '<%= components.foundation.scripts %>',
@@ -145,32 +103,21 @@ module.exports = function(grunt) {
                     '<%= paths.src %>/scripts/themes/**/*.js'
                 ],
                 dest : '<%= paths.build %>/js/<%= pkg.name %>.js'
-            },
-            styles : {
-                options: {
-                    banner: '<%= banner %>'
-                },
-                src : [
-                    '<%= components.foundation.styles %>',
-                    '<%= components.fontawesome.styles %>',
-                    '<%= paths.src %>/less/style.less',
-                    '<%= paths.src %>/less/default.less',
-                    '<%= paths.src %>/less/about.less',
-                    '<%= paths.src %>/less/category.less',
-                    '<%= paths.src %>/less/single.less',
-                    '<%= paths.src %>/less/widgets/posts.less'
-                ],
-                dest : '<%= paths.build %>/less/<%= pkg.name %>.less'
             }
-        },
+        }
+    });
 
+    // Work with image
+    grunt.config.merge({
         img: {
             // using only dirs with output path
             optimize: {
                 src  : '<%= paths.build %>/img/',
             },
-        },
+        }
+    });
 
+    grunt.config.merge({
         copy : {
             images : {
                 files : [{
@@ -188,8 +135,36 @@ module.exports = function(grunt) {
                     dest : '<%= paths.build %>/fonts/'
                 }]
             }
-        },
+        }
+    });
 
+    grunt.config.merge({
+        clean : [
+            '<%= paths.build %>/'
+        ]
+    });
+
+    grunt.config.merge({
+        sass: {
+            options: {
+                includePaths: [
+                    '<%= components.foundation.styles %>',
+                    '<%= components.fontawesome.styles %>',
+                ]
+            },
+            dist: {
+                options: {
+                    outputStyle: 'expanded',
+                    sourceMap: true,
+                },
+                files: {
+                    '<%= paths.build %>/css/theme.css': '<%= paths.src %>/scss/theme.scss'
+                }
+            }
+        },
+    });
+
+    grunt.config.merge({
         bower : {
             install : {
                 copy    : true,
@@ -199,16 +174,12 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-img');
-
     // Custom Tasks
     grunt.registerTask('default',  ['scripts', 'styles', 'images', 'fonts']);
-    grunt.registerTask('optimize', ['default', 'uglify', 'cssmin', 'imagemin']);
+    grunt.registerTask('optimize', ['default', 'uglify', 'imagemin']);
 
-    grunt.registerTask('scripts', ['clean:scripts', 'concat:scripts', 'concat:admin_scripts']);
-    grunt.registerTask('styles',  ['clean:styles',  'concat:styles', 'less:build', 'cssmin']);
-    grunt.registerTask('images',  ['clean:images',  'copy:images', 'img:optimize']);
-    grunt.registerTask('fonts',   ['clean:fonts',   'copy:fonts']);
+    grunt.registerTask('scripts', ['concat:scripts', 'concat:admin_scripts']);
+    grunt.registerTask('styles',  ['sass', 'cssmin']);
+    grunt.registerTask('images',  ['copy:images', 'img:optimize']);
+    grunt.registerTask('fonts',   ['copy:fonts']);
 };

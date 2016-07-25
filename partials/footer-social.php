@@ -16,8 +16,8 @@
     deb
     ?>
     <?php if($options): ?>
-        <div class="clearfix social">
-            <ul class="inline-list right">
+        <div class="social menu-centered">
+            <ul class="menu inline-list simple">
                 <?php foreach($options as $item): ?>
                     <li>
                         <a href="<?php echo $item['link']; ?>" title="<?php echo $item['title']; ?>">

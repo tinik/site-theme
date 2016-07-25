@@ -1,0 +1,40 @@
+
+.splash {
+    height: 500px;
+
+    h1 {
+        background: none repeat scroll 0 0 #2A2A2A;
+        color: #FFFFFF;
+        font-weight: 600;
+        letter-spacing: 4px;
+        padding: 10px 12px;
+    }
+
+    h1 .selected {
+        background: #FFFF00;
+        color: #2A2A2A;
+    }
+}
+
+.color-background {
+    color: #E8E8E8;
+
+    &.is-dark,
+    &.dark {
+        background: #2A2A2A repeat scroll 0 0;
+    }
+
+    &.is-light,
+    &.light {
+        background: none repeat scroll 0 0 #F0F0F0;
+        color: #444444;
+    }
+}
+
+.point {
+    background: url("./point.png") no-repeat;
+    padding-left: 135px;
+    min-height: 125px;
+    border: 0px;
+    color: #FFFF00;
+}

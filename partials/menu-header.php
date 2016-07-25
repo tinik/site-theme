@@ -1,16 +1,16 @@
-<nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
-    <ul class="title-area">
-        <li class="name">
-            <h1>
-                <a href="<?php echo get_home_url(); ?>">
-                    <?php _e('Home', 'ntishchuk'); ?>
-                </a>
-            </h1>
-        </li>
-        <li class="toggle-topbar menu-icon">
-            <a href="javascript:void(0);"><span><?php _e('Menu', 'ntishchuk'); ?></span></a>
-        </li>
-    </ul>
+<div class="top-bar">
+    <div class="top-bar-title">
+        <span data-responsive-toggle="responsive-menu" data-hide-for="medium" class="hide-for-large">
+            <button class="menu-icon" type="button" data-toggle></button>
+        </span>
 
-    <section class="top-bar-section"><?php echo $output; ?></section>
-</nav>
+        <a class="show-for-medium" href="<?php echo get_home_url(); ?>"><?php _e('Home', 'ntishchuk'); ?></a>
+    </div>
+
+    <div id="responsive-menu">
+        <div class="top-bar-right">
+            <?php echo $output; ?>
+        </div>
+    </div>
+</div>
+

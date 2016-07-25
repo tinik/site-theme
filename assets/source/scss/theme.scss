@@ -1,0 +1,18 @@
+// global settings
+@import 'settings';
+
+// vendor css frameworks
+@import 'foundation';
+@include foundation-everything;
+
+@import 'font-awesome';
+
+// theme styles
+@import 'default';
+@import 'about';
+@import 'category';
+@import 'single';
+@import 'style';
+@import 'search';
+@import 'widgets/posts';
+@import 'widgets/accordion';

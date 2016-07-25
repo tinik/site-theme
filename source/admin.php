@@ -59,3 +59,4 @@ add_action('admin_init', function() {
     // SCRIPT
     wp_enqueue_script('script_theme', assets_uri('js/admin.js'), [], '0.1.1', true);
 });
+

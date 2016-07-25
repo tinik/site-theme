@@ -7,7 +7,8 @@
         endwhile;
 
         echo '<br />';
-        theme_pagination($vars['query'], $vars['paged']);
+
+        create_pagination($vars['query'], $vars['paged']);
     endif;
     ?></div>
 <?php echo $vars['after_widget']; ?>

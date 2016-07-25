@@ -1,0 +1,19 @@
+
+$global-flexbox              : true;
+$global-radius               : 3px;
+$body-font-color             : #333;
+$secondary-color             : #e7e7e7;
+$include-html-classes        : true;
+$include-html-global-classes : $include-html-classes;
+
+
+// Menu - Top
+$topbar-background          : #222;
+$topbar-submenu-background  : $topbar-background; 
+$topbar-link-color          : #fff; 
+$topbar-menu-link-color     : #fff;
+
+// Menu - Global
+$menu-item-padding          : 0.5rem 1rem;
+$menu-item-color-active     : #fff;
+$menu-item-background-active: #272727;

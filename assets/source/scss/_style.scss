@@ -1,0 +1,81 @@
+.row {
+    max-width: 75rem;
+}
+
+.top-bar {
+    color: $topbar-link-color;
+    
+    .menu {
+        li {
+            &:hove {
+                > a {
+                    background: none repeat scroll 0 0 #272727;
+                    color: #FFFFFF;
+                }
+            }
+            &:active {
+                > a {
+                    background: none repeat scroll 0 0 #008CBA;
+                    color: #FFFFFF;
+                }
+            }
+        }
+    }
+    
+    .top-bar-title {
+        a {
+            color: #fff;
+            font-weight: 400;
+        }
+    }
+    
+    .menu {
+        a {
+            color: $topbar-link-color;
+            border-radius: $global-radius;
+        }
+    }
+}
+
+[name="s"], 
+[type="text"], 
+[type="date"], 
+[type="week"], 
+[type="month"], 
+[type="password"], 
+[type="datetime"], 
+[type="datetime-local"], 
+[type="email"], 
+[type="number"], 
+[type="search"], 
+[type="tel"], 
+[type="time"], 
+[type="url"], 
+[type="color"], 
+textarea {
+    -moz-appearance: none;
+    background-color: #fefefe;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+    font-family: inherit;
+    padding: 0.5rem;
+    transition: box-shadow 0.45s ease 0s, border-color 0.45s ease-in-out 0s;
+    
+    &:focus {
+        box-shadow: 0 0 0 #999999;
+    }
+}
+
+.label {
+    &.secondary {
+        background-color: #e7e7e7;
+        color: #333;
+    }
+}
+
+a {
+    .label {
+        cursor:pointer;
+    }
+}

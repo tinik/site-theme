@@ -1,0 +1,157 @@
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color:rgba(0, 0, 0, 0);
+    text-rendering: optimizelegibility;
+    padding: 0;
+    scroll-behavior: smooth;
+
+    input {
+        text-rendering: optimizelegibility;
+    }
+
+    .wrapper {
+        padding:30px 0px
+    }
+}
+
+a {
+    &.fa {
+        &.fa-edit {
+            color:#cacaca;
+            
+            &:hover {
+                color: #999;
+            }
+        }
+    }
+}
+
+h3.subheader a {
+    font-weight: 400;
+}
+
+.footer {
+    .social {
+        text-align: center;
+
+        .inline-list {
+            margin-bottom:0px;
+            
+            & > li {
+                margin: 0 0.2rem;
+                
+                a {
+                    opacity: 0.5;
+                    color: #5b5b5b;
+                    font-size: 26px;
+                    
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+
+    .feed-link {
+        a {
+            opacity: 0.5;
+            color: #5b5b5b;
+            font-size: 26px;
+            
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+ul.subnav {
+    float: right;
+    margin-top: 20px;
+    display: block;
+}
+
+
+.meta_data a {
+    color: #999999;
+}
+
+.footer {
+    background: none repeat scroll 0 0 #222222;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25) inset;
+    color: #666666;
+    font-size: 0.75rem;
+    padding: 24px 0;
+    position: relative;
+    z-index: 1000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25) inset;
+
+    .copyright {
+        font-size: 0.75rem;
+        padding: 15px 0px;
+        text-align: center;
+    }
+}
+
+.syntaxhighlighter {
+    overflow: auto;
+}
+
+.widget {
+    &.widget_categories {
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none outside none;
+        }
+    }
+}
+
+.search-content {
+  min-height: 5rem;
+}
+
+.siteorigin-panels,
+.page-template-default,
+.page {
+    .panel-grid {
+        margin:0px;
+
+        .panel-grid-cell {
+            padding:0px;
+        }
+    }
+}
+
+.sow-headline {
+    h1, h2, h3, h4, h5, h6 {
+        margin:0px;
+        padding:0px;
+    }
+}
+
+#up {
+    border-radius: $global-radius;
+    position: fixed;
+    bottom: 1rem;
+    right: 2rem;
+    color: #2a2a2a;
+    font-size: 34px;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    text-align: center;
+    text-decoration: none;
+    transition: opacity 0.5s ease 0s;
+    z-index: 10000;
+
+    &:hover {
+      opacity: 1 !important;
+      transition: opacity 0.5s ease;
+    }
+}
