@@ -12,8 +12,6 @@
             ];
         endif;
     endforeach;
-
-    deb
     ?>
     <?php if($options): ?>
         <div class="social menu-centered">

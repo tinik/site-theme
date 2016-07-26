@@ -7,13 +7,14 @@ class Accordion extends AbstractWidget
 
     protected $path = 'partials/widgets/accordion';
 
-    public function __construct($id = 'theme-custom-accordion', $name, $widget = [], $options = [])
+    public function __construct()
     {
-        $name = _('Theme Accordion');
+        $id = 'theme-custom-accordion';
+        $name = 'Theme Accordion';
 
-        parent::__construct($id, $name, array_merge([
+        parent::__construct($id, _($name), [
             'description' => _('Create "accordion" widget'),
-        ]), $options);
+        ]);
     }
 
     /**

@@ -74,7 +74,7 @@
     }, 10 , 2);
 
     add_action('wp_nav_menu', function($output) {
-        return Template::fetch('partials/menu-header', [
+        return @Template::fetch('partials/menu-header', [
             'output'=>Spaceless::content($output)
         ]);
     });

@@ -19,6 +19,8 @@ abstract class AbstractWidget extends \WP_Widget
                 'slug' => 'theme-bundle'
             ],
         ], $widget), $options);
+
+        do_action('widgets_initialize_widget_' . $id, $this);
     }
 
     protected function render($template, array $variables = [])
@@ -45,20 +47,5 @@ abstract class AbstractWidget extends \WP_Widget
         add_action('widgets_init', function() use(&$class_name){
             register_widget($class_name);
         });
-    }
-
-    /**
-     * Sanitize widget form values as they are saved.
-     *
-     * @see WP_Widget::update()
-     *
-     * @param array $new Values just sent to be saved.
-     * @param array $old Previously saved values from database.
-     *
-     * @return array Updated safe values to be saved.
-     */
-    public function update($new, $old)
-    {
-        return $new;
     }
 }

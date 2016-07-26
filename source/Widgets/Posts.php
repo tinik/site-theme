@@ -7,12 +7,14 @@ class Posts extends AbstractWidget
 
     protected $path = 'partials/widgets/posts';
 
-    public function __construct($id = 'theme-custom-posts', $name, $widget = [], $options = [])
+    public function __construct()
     {
-        $name = _('Theme Posts');
-        parent::__construct($id, $name, array_merge([
+        $id = 'theme-custom-posts';
+        $name = 'Theme Posts';
+
+        parent::__construct($id, _($name), [
             'description' => _('Render blog posts'),
-        ]), $options);
+        ]);
     }
 
     /**
