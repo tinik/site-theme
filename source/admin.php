@@ -1,6 +1,7 @@
 <?php
 
 use Fields\FieldFactory;
+use Helpers\Message;
 
 add_action('init', function() {
     $meta = new Options\OptionBox('meta', 'Head Code Insertion');
@@ -49,10 +50,7 @@ add_action('init', function() {
 add_action('admin_init', function() {
     if(!is_plugin_active('siteorigin-panels/siteorigin-panels.php')) {
         add_action('admin_notices', function() {
-            $type = 'error';
-            $message = _('Plugin "siteorigin-panels" is not active.');
-
-            Helpers\Message::admin($type, $message);
+            Message::render(Message::ERROR, _('Plugin "siteorigin-panels" is not active.'));
         });
     }
 

@@ -2,15 +2,13 @@
     "name": "nikolay/ntishchuk",
     "type": "wp-theme, theme",
     "homepage": "http://ntischuk.com",
-    "authors": [
-        {
-            "name": "Nikolay",
-            "email": "john@example.com"
-        }
-    ],
+    "authors": [{
+        "name": "Nikolay",
+        "email": "john@example.com"
+    }],
     "minimum-stability": "dev",
     "require": {
-        
+
     },
     "config": {
         "use-include-path": true
@@ -23,8 +21,8 @@
             "": "source/"
         },
         "files": [
-            "source/admin.php", 
-            "source/search.php" 
+            "source/admin.php",
+            "source/search.php"
         ]
     }
 }

@@ -4,12 +4,14 @@
     use Helpers\Spaceless;
     use Options\OptionBox;
 
+    define('SITE_NAME', basename(__DIR__));
+
     /** @var \Composer\Autoload\ClassLoader $autoload */
     $autoload = require_once __DIR__ . '/vendor/autoload.php';
 
-    function assets_uri($path, $dispay = false) {
+    function assets_uri($path, $display = false) {
         $uri = sprintf('%s/assets/build/%s', get_template_directory_uri(), $path);
-        if($dispay) {
+        if($display === true) {
             print $uri;
         }
 
